@@ -29,8 +29,6 @@ class GPT4Free(CustomLLM):
 
     @llm_completion_callback()
     def complete(self, prompt: str, **kwargs: Any) -> CompletionResponse:
-        print("prompt", prompt)
-        print("kwargs", kwargs)
         response = g4f.ChatCompletion.create(
             model=self.g4f_model,
             messages=[{"role": "user", "content": prompt}],
