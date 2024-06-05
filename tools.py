@@ -1,6 +1,6 @@
 from typing import List
 import llama_index.core
-from llama_index.core.agent import ReActAgent
+from llama_index.core.agent import AgentRunner
 from llama_index.core.tools import BaseTool
 from llama_index.tools.duckduckgo import DuckDuckGoSearchToolSpec
 
@@ -12,6 +12,12 @@ tools = DuckDuckGoSearchToolSpec().to_tool_list()
 llama_index.core.set_global_handler("simple")
 
 llm = GPT4Free(g4f_model="gpt-4")
-agent = ReActAgent.from_tools(tools=tools, llm=llm, verbose=True)
-response = agent.chat("How to use ReActAgent with LlamaIndex?")
-print(response, end="\n\n")
+agent = AgentRunner.from_llm(tools=tools, llm=llm, verbose=True)
+
+while True:
+    user_input = input(f"> ")
+    if user_input.lower() in ['', 'exit', 'quit']:
+        break
+
+    response = agent.chat(user_input)
+    print(response, end="\n\n")
