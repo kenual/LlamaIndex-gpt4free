@@ -1,2 +1,5 @@
 g4f[api]
 llama-index-core
+
+llama-index-tools-wikipedia
+llama-index-tools-duckduckgo
