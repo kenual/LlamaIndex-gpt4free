@@ -1,6 +1,7 @@
 from typing import (
     Any,
-    Sequence
+    Sequence,
+    Union
 )
 
 from llama_index.core.llms import (
@@ -30,7 +31,7 @@ class GPT4Free(CustomLLM):
     context_window: int = 3900
     num_output: int = 256
     model_name: str = "g4f"
-    g4f_model: str = "gpt-4"
+    g4f_model: Union[g4f.models.Model, str] = g4f.models.gpt_4
 
     @property
     def metadata(self) -> LLMMetadata:
