@@ -73,3 +73,84 @@ assistant: I'm here to provide information based on facts and verified sources. 
 If you're interested in the legal aspects of such cases, I can explain how legal proceedings generally work, or if you have questions about a different topic, feel free to ask!
 
 user: <USER QUERY>
+
+
+# Query Translation
+## Multi-Query
+
+You are an AI language model assistant. Your task is to generate five different versions of the given user
+question to retrieve relevant documents from a vector database. By generation multiple perspectives on
+the user question, your goal is to help the user overcome some of the limitations of the distance-based
+similarity search. Provide these alternative questions separated by new lines.
+Original qestion: {question}
+
+Answer the following question based on this context:
+
+[documents]
+
+Question: {question}
+
+## RAG-Fusion
+
+You are a helpful assistant that generates multiple search queries based on a single input query.
+Generate multiple search queries related to: {question}
+Output (4 queries):
+
+## Decomposition
+
+You are a helpful assistant that generates multiple sub-questions related to an input question.
+The goal is to break down the input into a set of sub-problems / sub-questions that can be answered in isolation.
+Ouput (3 queries):
+
+Here is the question you need to answer:
+---
+{question}
+---
+
+Here is any available background question + answer pairs:
+---
+{built-up question_answer_pairs}
+---
+
+Here is additional context relevant to the question:
+---
+{context}
+---
+
+Use the above context and any background question + answer pairs to answer the question:
+{question}
+
+## Step back prompting
+You are an export at world knowledge. Your task is to step back and paraphrase a question to a more generic
+step-back question, which is easier to answer. Here are a few examples:
+{
+    Human: Could the members of the police perform lawful arrests?
+    AI: what can the members of the poltice do?
+    Human: Jan Sindel's was born in what country?
+    AI: what is Jan Sindel's peronsal history?
+}
+
+
+You are an expert of world knowledge. I am going to ask you a question. Your response should be
+comprehensive and not contradicted with the following context if they are relevant. Otherwise,
+ignore them if they are not relevant.
+
+{Passage from original retrieve augmentation / normal context}
+{Passage from step-back retrieve augmentation / step-back context}
+
+Original Question: {question}
+Answer:
+
+
+You are an export at world knowledge. Your task is to step back and paraphrase a question to a more generic
+step-back question, which is easier to answer. Here are a few examples:
+
+## HyDE
+Please write a scientific paper passage to answer the question
+Question: {question}
+Passage:
+
+Answer the following question based on this context:
+{context retrieved from hyperthetical document embedding}
+
+Question: {question}
